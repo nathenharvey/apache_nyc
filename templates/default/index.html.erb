@@ -1,5 +1,14 @@
 <html>
   <body>
     <h1>Hello, world!</h1>
+
+    <p>
+      My name is <%= node["hostname"] %>.
+    </p>
+
+    <p>
+      I have <%= node["memory"]["total"].to_i * 1024 %> bytes of RAM.
+    </p>
+
   </body>
 </html>
