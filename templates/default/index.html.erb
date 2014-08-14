@@ -3,11 +3,11 @@
     <h1>Hello, <%= node["apache"]["greeting"] %>!</h1>
 
     <p>
-      My name is <%= node["hostname"] %>.
+      We love <%= @site_name %>
     </p>
 
     <p>
-      I have <%= node["memory"]["total"].to_i * 1024 %> bytes of RAM.
+      I am <%= node["ipaddress"] %>:<%= @port %>
     </p>
 
   </body>
