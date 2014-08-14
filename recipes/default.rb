@@ -23,7 +23,7 @@ execute "mv /etc/httpd/conf.d/welcome.conf{,.disabled}" do
   only_if do
     File.exist?("/etc/httpd/conf.d/welcome.conf")
   end
-  notifies :restart, "service[httpd]"
+  notifies :restart, "service[httpd]", :immediately
 end
 
 # disable the default home page
@@ -47,10 +47,11 @@ node["apache"]["sites"].each do |site_name, site_data|
       :document_root => document_root,
       :port => site_data["port"]
     )
+    notifies :restart, "service[httpd]", :immediately
   end
 
   #   create the document root directory
-  directory document_root do
+  directory "#{document_root}" do
     mode      "0755"
     action    :create
     recursive true
