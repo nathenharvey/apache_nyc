@@ -10,10 +10,6 @@ describe 'apache::default' do
     end.converge(described_recipe)
   end
 
-  before do
-    stub_command("File.exist?(\"/etc/httpd/conf.d/welcome.conf\")").and_return(true)
-  end
-
   it 'installs apache' do
     expect(chef_run).to install_package('httpd')
   end
@@ -27,11 +23,15 @@ describe 'apache::default' do
   end
 
   it 'creates a default home page' do
-    expect(chef_run).to render_file('/var/www/html/index.html').with_content(/Hello/)
+    expect(chef_run).to do
+      render_file('/var/www/html/index.html').with_content(/Hello/)
+    end
   end
 
   it 'creates a virtual host configuration for clowns' do
-    expect(chef_run).to render_file('/etc/httpd/conf.d/clowns.conf').with_content('VirtualHost')
+    expect(chef_run).to do
+      render_file('/etc/httpd/conf.d/clowns.conf').with_content('VirtualHost')
+    end
   end
 
   it 'creates a document root for clowns' do
@@ -39,11 +39,15 @@ describe 'apache::default' do
   end
 
   it 'creates a home page for clowns' do
-    expect(chef_run).to render_file('/srv/apache/clowns/index.html').with_content('clowns')
+    expect(chef_run).to do
+      render_file('/srv/apache/clowns/index.html').with_content('clowns')
+    end
   end
 
   it 'creates a virtual host configuration for bears' do
-    expect(chef_run).to render_file('/etc/httpd/conf.d/bears.conf').with_content('VirtualHost')
+    expect(chef_run).to do
+      render_file('/etc/httpd/conf.d/bears.conf').with_content('VirtualHost')
+    end
   end
 
   it 'creates a document root for bears' do
@@ -51,11 +55,15 @@ describe 'apache::default' do
   end
 
   it 'creates a home page for bears' do
-    expect(chef_run).to render_file('/srv/apache/bears/index.html').with_content('bears')
+    expect(chef_run).to do
+      render_file('/srv/apache/bears/index.html').with_content('bears')
+    end
   end
 
   it 'creates a virtual host configuration for lions' do
-    expect(chef_run).to render_file('/etc/httpd/conf.d/lions.conf').with_content('VirtualHost')
+    expect(chef_run).to do
+      render_file('/etc/httpd/conf.d/lions.conf').with_content('VirtualHost')
+    end
   end
 
   it 'creates a document root for lions' do
@@ -63,6 +71,8 @@ describe 'apache::default' do
   end
 
   it 'creates a home page for lions' do
-    expect(chef_run).to render_file('/srv/apache/lions/index.html').with_content('lions')
+    expect(chef_run).to do
+      render_file('/srv/apache/lions/index.html').with_content('lions')
+    end
   end
 end
