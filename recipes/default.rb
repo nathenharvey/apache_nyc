@@ -26,13 +26,6 @@ execute "mv /etc/httpd/conf.d/welcome.conf{,.disabled}" do
   notifies :restart, "service[httpd]", :immediately
 end
 
-# disable the default home page
-# if File.exist?("/etc/http/conf.d/welcome.conf") do
-#   execute "mv /etc/httpd/conf.d/welcome.conf{,.disabled}" do
-#     notifies :restart, "service[httpd]"
-#   end
-# end
-
 # loop over my apache sites
 node["apache"]["sites"].each do |site_name, site_data|
   #   set document root
