@@ -23,15 +23,11 @@ describe 'apache::default' do
   end
 
   it 'creates a default home page' do
-    expect(chef_run).to do
-      render_file('/var/www/html/index.html').with_content(/Hello/)
-    end
+    expect(chef_run).to render_file('/var/www/html/index.html').with_content(/Hello/)
   end
 
   it 'creates a virtual host configuration for clowns' do
-    expect(chef_run).to do
-      render_file('/etc/httpd/conf.d/clowns.conf').with_content('VirtualHost')
-    end
+    expect(chef_run).to render_file('/etc/httpd/conf.d/clowns.conf').with_content('VirtualHost')
   end
 
   it 'creates a document root for clowns' do
@@ -39,15 +35,11 @@ describe 'apache::default' do
   end
 
   it 'creates a home page for clowns' do
-    expect(chef_run).to do
-      render_file('/srv/apache/clowns/index.html').with_content('clowns')
-    end
+    expect(chef_run).to render_file('/srv/apache/clowns/index.html').with_content('clowns')
   end
 
   it 'creates a virtual host configuration for bears' do
-    expect(chef_run).to do
-      render_file('/etc/httpd/conf.d/bears.conf').with_content('VirtualHost')
-    end
+    expect(chef_run).to render_file('/etc/httpd/conf.d/bears.conf').with_content('VirtualHost')
   end
 
   it 'creates a document root for bears' do
@@ -55,15 +47,11 @@ describe 'apache::default' do
   end
 
   it 'creates a home page for bears' do
-    expect(chef_run).to do
-      render_file('/srv/apache/bears/index.html').with_content('bears')
-    end
+    expect(chef_run).to render_file('/srv/apache/bears/index.html').with_content('bears')
   end
 
   it 'creates a virtual host configuration for lions' do
-    expect(chef_run).to do
-      render_file('/etc/httpd/conf.d/lions.conf').with_content('VirtualHost')
-    end
+    expect(chef_run).to render_file('/etc/httpd/conf.d/lions.conf').with_content('VirtualHost')
   end
 
   it 'creates a document root for lions' do
@@ -71,8 +59,6 @@ describe 'apache::default' do
   end
 
   it 'creates a home page for lions' do
-    expect(chef_run).to do
-      render_file('/srv/apache/lions/index.html').with_content('lions')
-    end
+    expect(chef_run).to render_file('/srv/apache/lions/index.html').with_content('lions')
   end
 end
