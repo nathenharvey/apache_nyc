@@ -23,8 +23,3 @@ HashSyntax:
 LineLength:
   Max: 96
 
-# Offense count: 69
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-StringLiterals:
-  Enabled: false
