@@ -44,7 +44,7 @@ node["apache"]["sites"].each do |site_name, site_data|
   end
 
   #   create the document root directory
-  directory "#{document_root}" do
+  directory "document_root" do
     mode      "0755"
     action    :create
     recursive true
