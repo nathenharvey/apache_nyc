@@ -24,7 +24,7 @@ describe 'clowns website' do
   end
 
   it 'displays a custom home page' do
-    expect(command 'curl localhost:80').to return_stdout /clowns/
+    expect(command 'curl localhost:80').to return_stdout(/clowns/)
   end
 end
 
@@ -34,6 +34,6 @@ describe 'bears website' do
   end
 
   it 'displays a custom home page' do
-    expect(command 'curl localhost:81').to return_stdout /bears/
+    expect(command 'curl localhost:81').to return_stdout(/bears/)
   end
 end
