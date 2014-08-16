@@ -1,10 +1,14 @@
 require 'chefspec'
 require 'chefspec/deprecations'
 
-at_exit { ChefSpec::Coverage.report! }
+# at_exit { ChefSpec::Coverage.report! }
 
 describe 'apache::default' do
-  let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
+  let(:chef_run) do
+    ChefSpec::Runner.new do |node|
+      node.set['apache']['sites']['lions'] = { 'port' => 82 }
+    end.converge(described_recipe)
+  end
 
   before do
     stub_command("File.exist?(\"/etc/httpd/conf.d/welcome.conf\")").and_return(true)
@@ -50,4 +54,15 @@ describe 'apache::default' do
     expect(chef_run).to render_file('/srv/apache/bears/index.html').with_content('bears')
   end
 
+  it 'creates a virtual host configuration for lions' do
+    expect(chef_run).to render_file('/etc/httpd/conf.d/lions.conf').with_content('VirtualHost')
+  end
+
+  it 'creates a document root for lions' do
+    expect(chef_run).to create_directory('/srv/apache/lions')
+  end
+
+  it 'creates a home page for lions' do
+    expect(chef_run).to render_file('/srv/apache/lions/index.html').with_content('lions')
+  end
 end
